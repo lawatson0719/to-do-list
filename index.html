@@ -2,10 +2,12 @@
 <html>
 <head>
 	<title></title>
+	<link rel="stylesheet" type="text/css" href="normalize.css">
+	<link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
 	<header>
-		<h1></h1>
+		<h1>todos</h1>
 	</header>
 
 	<div id="to-do-list">
@@ -15,16 +17,23 @@
 			<!-- <li><button></button><span></span><button></button></li>  -->
 			<!-- <li><button></button><span></span><button></button></li>  -->
 		</ul>
-		<div id="list-footer">
-			<span></span>
+		<div class="cf" id="list-footer">
+			<span id="num-of-items">lorem ipsum</span>
 			<ul id="list-controls">
-				<li><button></button></li>
-				<li><button></button></li>
-				<li><button></button></li>
+				<li class="no-bullets">
+					<button>All</button>
+				</li>
+				<li class="no-bullets">
+					<button>Active</button>
+				</li>
+				<li class="no-bullets">
+					<button>Completed</button>
+				</li>
 			</ul>
 		</div>
 	</div>
 	<footer>A product of etc etc Industries</footer>
+	<small>A product of etc etc Industries</small>
 	<script type="text/javascript" src="main.js"></script>
 </body>
 </html>
