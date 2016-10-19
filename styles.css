@@ -1,1 +1,91 @@
-akjbhgerg
+*, *:before, *:after {
+	box-sizing: border-box;
+}
+
+.cf:after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+body {
+	background-color: #f5f5f5;
+	text-align: center;
+
+}
+
+#list-controls {
+	display: inline-block;
+	margin-bottom: 25px;
+	float: right;
+}
+
+.no-bullets {
+	list-style-type: none;
+	display: inline-block;
+	border-radius: 0.5em;
+}
+
+.no-bullets button {
+	border-radius: 0.5em;
+	background-color: #ddd;
+	border: none;
+}
+
+span {
+	float: left;
+	display: none;
+}
+
+ul {
+	padding: 0;
+	margin: 0;
+}
+
+input {
+	height: 40px;
+	width: 50%;
+	padding: 5px;
+	margin-bottom: 25px;
+	box-shadow: 2px 2px 10px -2px #5a5a5a;
+	border-radius: 0.5em;
+	border: none;
+}
+
+#list-footer {
+	margin: 0 25%;
+}
+
+
+/***** Font-Families *****/
+
+@font-face {
+	font-family: poiret_one;
+	src: url(Poiret_One/PoiretOne-Regular.ttf);
+}
+
+header {
+	font-family: poiret_one;
+	font-size: 45px;
+	color: #272822;
+	font-weight: light;
+}
+
+@font-face {
+	font-family: lato;
+	src: url(Lato/Lato-Regular.ttf);
+}
+
+input,
+#list-controls,
+span, 
+small {
+	font-family: lato;
+	color: #2d2d2f;
+}
+
+
+
+
+
+
