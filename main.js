@@ -10,6 +10,7 @@ function ListItem (id) {
 
 function addListItem(id) {
 	var newTodo = document.createElement("li");
+	newTodo.classList.add("to-do");
 	newTodo.id= "todo" + (idCounter);
 	// Create three elements to be inserted into the new todo
 	var textSpan = document.createElement("span");
@@ -33,6 +34,13 @@ function addListItem(id) {
 	// put the new list in the array of objects and append the item to the ul
 	list.appendChild(newTodo);
 }
+
+function refreshDisplay () {
+	// This garbage function is going to have to run a stupid motherfucking loop everytime you need 
+	// to refresh what's in the list items
+
+}
+
 
 
 // empty array to fill with todo objects
