@@ -20,8 +20,8 @@ function addListItem(id) {
 	textSpan.textContent = input.value;
 
 	// add classes to the buttons to control them
-	itemCompleteButton.classList.add("completeButton");
-	itemDeleteButton.classList.add("deleteButton");
+	itemCompleteButton.classList.add("complete-button");
+	itemDeleteButton.classList.add("delete-button");
 
 
 	// append the items to the newly created li
@@ -65,7 +65,7 @@ input.addEventListener("keydown", function(e) {
 
 // Event listener to handle deletions
 list.addEventListener("click", function(e) {
-	if (e.target.matches(".deleteButton")) {
+	if (e.target.matches(".delete-button")) {
 		// grab and remove deleted todo from DOM
 		var id = e.target.parentElement.id; 
 		var axedItem = document.querySelector("#" + id);
@@ -82,7 +82,7 @@ list.addEventListener("click", function(e) {
 
 // Event listener to handle completions
 list.addEventListener("click", function(e) {
-	if (e.target.matches(".completeButton")) {
+	if (e.target.matches(".complete-button")) {
 		var id = e.target.parentElement.id;
 		console.log("You clicked a complete button");
 
