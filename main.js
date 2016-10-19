@@ -25,6 +25,7 @@ function addListItem(id, content) {
 	// add classes to the buttons to control them
 	itemCompleteButton.classList.add("complete-button");
 	itemDeleteButton.classList.add("delete-button");
+	itemDeleteButton.textContent = "X";
 
 
 	// append the items to the newly created li
@@ -98,7 +99,7 @@ var displaying = 0; // 0 - All
 
 // main event listener for adding todos
 input.addEventListener("keydown", function(e) {
-	if (e.keyCode === 13 ) {
+	if (e.keyCode === 13 && input.value != "") {
 
 		// add a new object to the list array and create a new li to be inserted, both with id references
 		// equal to idCounter
