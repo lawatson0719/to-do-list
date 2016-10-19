@@ -45,6 +45,8 @@ function refreshDisplay (mode) {
 		list.removeChild(removingChild);
 	}
 
+	var filtered;
+
 	if (mode === 0) {
 		for (var i = 0 ; i < data.length ; i++) {
 			console.log(data[i].content);
@@ -57,7 +59,8 @@ function refreshDisplay (mode) {
 
 
 	if (mode === 1) {
-		// filter
+		filtered = data.filter((value) => (value.completed === false));
+		console.log(filtered);
 
 
 		for (var i = 0 ; i < data.length ; i++) {
@@ -69,10 +72,11 @@ function refreshDisplay (mode) {
 
 
 	if (mode === 2) {
-		// filter
+		filtered = data.filter((value) => (value.completed === true));
+		console.log(filtered);
 
-		for (var i = 0 ; i < data.length ; i++) {
-			console.log("Yo");
+		for (var i = 0 ; i < filtered.length ; i++) {
+			addListItem(filtered[i].id, filtered[i].content);
 		}
 
 		displaying = 2;
