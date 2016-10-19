@@ -14,7 +14,8 @@ function addListItem(id) {
 	// Create three elements to be inserted into the new todo
 	var textSpan = document.createElement("span");
 	var itemDeleteButton = document.createElement("button");
-	var itemCompleteButton = document.createElement("button");
+	var itemCompleteButton = document.createElement("input");
+	itemCompleteButton.setAttribute("type","checkbox");
 
 	// insert the text input into the span
 	textSpan.textContent = input.value;
@@ -84,7 +85,6 @@ list.addEventListener("click", function(e) {
 list.addEventListener("click", function(e) {
 	if (e.target.matches(".complete-button")) {
 		var id = e.target.parentElement.id;
-		console.log("You clicked a complete button");
 
 		id = Number(id.slice(4));
 		var index = listItems.findIndex((value) => (value.id === id));
