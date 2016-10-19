@@ -52,6 +52,7 @@ ul {
 	border-radius: 0.5em;
 	border: none;
 	outline: none;
+	font-size: 20px;
 }
 
 input[type='checkbox'] {
@@ -117,6 +118,13 @@ header {
 	src: url(Lato/Lato-Regular.ttf);
 }
 
+@font-face {
+	font-family: lato-italic;
+	src: url(Lato/Lato-Italic.ttf);
+}
+
+
+
 input,
 #list-controls,
 span, 
@@ -124,6 +132,8 @@ small {
 	font-family: lato;
 	color: #2d2d2f;
 }
+
+
 
 
 
