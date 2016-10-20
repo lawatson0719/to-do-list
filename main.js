@@ -58,9 +58,9 @@ function refreshDisplay (mode) {
 
 	// Display mode "ALL"
 	if (mode === 0) {
-		for (var i = 0 ; i < data.length ; i++) {
-			addListItem(data[i].id, data[i].content, data[i].completed);
-		}
+		filtered = data.filter((value) => (true));
+
+		filterAdd(filtered);
 
 		displaying = 0;
 	}
@@ -69,9 +69,7 @@ function refreshDisplay (mode) {
 	if (mode === 1) {
 		filtered = data.filter((value) => (value.completed === false));
 
-		for (var i = 0 ; i < filtered.length ; i++) {
-			addListItem(filtered[i].id, filtered[i].content, filtered[i].completed);
-		}
+		filterAdd(filtered);
 
 		displaying = 1;
 	}
@@ -80,11 +78,25 @@ function refreshDisplay (mode) {
 	if (mode === 2) {
 		filtered = data.filter((value) => (value.completed === true));
 
-		for (var i = 0 ; i < filtered.length ; i++) {
-			addListItem(filtered[i].id, filtered[i].content, filtered[i].completed);
-		}
+		filterAdd(filtered);
 
 		displaying = 2;
+	}
+
+	setListCounter(filtered);
+}
+
+function filterAdd(arr) {
+	for (var i = 0 ; i < arr.length ; i++) {
+		addListItem(arr[i].id, arr[i].content, arr[i].completed);
+	}
+}
+
+function setListCounter(arr) {
+	var number = arr.length;
+	itemCount.textContent = number + " item";
+	if (number != 1) {
+		itemCount.textContent += "s";
 	}
 }
 
@@ -93,6 +105,7 @@ var data = [];
 
 var list = document.querySelector("#list-items");
 var input = document.querySelector("input");
+var itemCount = document.querySelector("#num-of-items");
 var showCompleteButton = document.querySelector("#completed-button");
 var showActiveButton = document.querySelector("#active-button");
 var showAllButton = document.querySelector("#show-all-button");
@@ -112,10 +125,11 @@ input.addEventListener("keydown", function(e) {
 		// add a new object to the list array and create a new li to be inserted, both with id references
 		// equal to idCounter
 		registerListItem(idCounter, input.value);
-		addListItem(idCounter, input.value);
 		idCounter++;
 		// reset text input to ""
 		input.value = "";
+
+		refreshDisplay(displaying);
 	}
 });
 

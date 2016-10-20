@@ -39,7 +39,7 @@ body {
 
 #num-of-items {
 	float: left;
-	display: none;
+	display: block;
 }
 
 ul {
