@@ -32,6 +32,7 @@ body {
 	background-color: #ddd;
 	border: 0;
 	outline: 0;
+
 }
 
 .active {
@@ -41,12 +42,14 @@ body {
   	transition-duration: 0.3s;
   	transition-property: transform;
   	transition-timing-function: ease-out;
-  	transform: translateY(-8px);
+  	/*transform: translateY(-8px);*/
 }
 
 .active:active {
-	
+	transform: translateY(-8px);
 }
+
+
 
 #num-of-items {
 	float: left;
