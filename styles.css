@@ -30,10 +30,27 @@ body {
 .no-bullets button {
 	border-radius: 0.5em;
 	background-color: #ddd;
-	border: none;
+	border: 0;
+	outline: 0;
 }
 
 .active {
+  	transform: translateZ(0);
+  	box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  	backface-visibility: hidden;
+  	transition-duration: 0.3s;
+  	transition-property: transform;
+  	transition-timing-function: ease-out;
+  	background-color: #245367;
+
+}
+
+.active:hover {
+  	transform: translateY(-8px);
+  	background-color: #245367;
+}
+
+.active:active {
 	
 }
 
