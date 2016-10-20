@@ -174,27 +174,34 @@ list.addEventListener("click", function(e) {
 
 // Event listener to handle all filter
 document.addEventListener("click", function(e) {
-	if (e.target.matches("#show-all-button") && !(displaying === 0)) {
+	if (e.target.matches("#show-all-button")) {
+		console.log("yo");
 		refreshDisplay(0);
-		document.querySelector(".active").classList.remove("active");
+		if (document.querySelector(".active")) {
+			document.querySelector(".active").classList.remove("active");
+		}		
 		showAllButton.classList.add("active");
 	}
 });
 
 // Event listener to handle active filter
 document.addEventListener("click", function(e) {
-	if (e.target.matches("#active-button") && !(displaying === 1)) {
+	if (e.target.matches("#active-button")) {
 		refreshDisplay(1);
-		document.querySelector(".active").classList.remove("active");
+		if (document.querySelector(".active")) {
+			document.querySelector(".active").classList.remove("active");
+		}
 		showActiveButton.classList.add("active");
 	}
 });
 
 // Event listener to handle completed filter
 document.addEventListener("click", function(e) {
-	if (e.target.matches("#completed-button") && !(displaying === 2)) {
+	if (e.target.matches("#completed-button")) {
 		refreshDisplay(2);
-		document.querySelector(".active").classList.remove("active");
+		if (document.querySelector(".active")) {
+			document.querySelector(".active").classList.remove("active");
+		}
 		showCompleteButton.classList.add("active");
 	}
 });

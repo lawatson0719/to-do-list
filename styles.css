@@ -34,6 +34,13 @@ body {
 	outline: 0;
 }
 
+.no-bullets button:hover {
+  	transition-duration: 0.3s;
+  	transition-property: transform;
+  	transition-timing-function: ease-out;
+  	transform: translateY(-8px);	
+}
+
 .active {
   	transform: translateZ(0);
   	box-shadow: 0 0 1px rgba(0, 0, 0, 0);
@@ -44,9 +51,9 @@ body {
   	transform: translateY(-8px);
 }
 
-.active:active {
-	
-}
+/*.active:hover {
+  	transform: translateY(-8px);
+}*/
 
 #num-of-items {
 	float: left;
