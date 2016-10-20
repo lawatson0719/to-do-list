@@ -58,10 +58,9 @@ function refreshDisplay (mode) {
 
 	// Display mode "ALL"
 	if (mode === 0) {
-		for (var i = 0 ; i < data.length ; i++) {
-			addListItem(data[i].id, data[i].content, data[i].completed);
-		}
+		filtered = data.filter((value) => (true));
 
+		filterAdd(filtered);
 
 		displaying = 0;
 	}
@@ -70,10 +69,7 @@ function refreshDisplay (mode) {
 	if (mode === 1) {
 		filtered = data.filter((value) => (value.completed === false));
 
-
-		for (var i = 0 ; i < filtered.length ; i++) {
-			addListItem(filtered[i].id, filtered[i].content, filtered[i].completed);
-		}
+		filterAdd(filtered);
 
 		displaying = 1;
 	}
@@ -82,11 +78,25 @@ function refreshDisplay (mode) {
 	if (mode === 2) {
 		filtered = data.filter((value) => (value.completed === true));
 
-		for (var i = 0 ; i < filtered.length ; i++) {
-			addListItem(filtered[i].id, filtered[i].content, filtered[i].completed);
-		}
+		filterAdd(filtered);
 
 		displaying = 2;
+	}
+
+	setListCounter(filtered);
+}
+
+function filterAdd(arr) {
+	for (var i = 0 ; i < arr.length ; i++) {
+		addListItem(arr[i].id, arr[i].content, arr[i].completed);
+	}
+}
+
+function setListCounter(arr) {
+	var number = arr.length;
+	itemCount.textContent = number + " item";
+	if (number != 1) {
+		itemCount.textContent += "s";
 	}
 }
 
@@ -95,7 +105,8 @@ var data = [];
 
 var list = document.querySelector("#list-items");
 var input = document.querySelector("input");
-var showCompleteButton = document.querySelector("#complete-button");
+var itemCount = document.querySelector("#num-of-items");
+var showCompleteButton = document.querySelector("#completed-button");
 var showActiveButton = document.querySelector("#active-button");
 var showAllButton = document.querySelector("#show-all-button");
 var idCounter = 1;
@@ -114,10 +125,11 @@ input.addEventListener("keydown", function(e) {
 		// add a new object to the list array and create a new li to be inserted, both with id references
 		// equal to idCounter
 		registerListItem(idCounter, input.value);
-		addListItem(idCounter, input.value);
 		idCounter++;
 		// reset text input to ""
 		input.value = "";
+
+		refreshDisplay(displaying);
 	}
 });
 
@@ -130,7 +142,7 @@ list.addEventListener("click", function(e) {
 		var axedItem = document.querySelector("#" + id);
 
 			//remove item from DOM
-		axedItem.parentElement.removeChild(axedItem);
+		// axedItem.parentElement.removeChild(axedItem);
 		
 			// Find todo in data by id
 		id = Number(id.slice(4));
@@ -138,6 +150,9 @@ list.addEventListener("click", function(e) {
 
 			// remove item from data
 		data.splice(index, 1);
+
+
+		refreshDisplay(displaying);
 	} 
 });
 
@@ -152,15 +167,16 @@ list.addEventListener("click", function(e) {
 		var index = data.findIndex((value) => (value.id === id));
 		data[index].completed = data[index].completed ? false : true;
 
-
 			// Render to remove item if appropriate
-		setTimeout(refreshDisplay.bind(null, displaying), 600);
+		setTimeout(refreshDisplay.bind(null, displaying), 300);
 	} 
 });
 
 // Event listener to handle all filter
 document.addEventListener("click", function(e) {
 	if (e.target.matches("#show-all-button") && !(displaying === 0)) {
+		document.querySelector(".active").classList.remove("active");
+		showAllButton.parentElement.classList.add("active");
 		refreshDisplay(0);
 	}
 });
@@ -168,6 +184,8 @@ document.addEventListener("click", function(e) {
 // Event listener to handle active filter
 document.addEventListener("click", function(e) {
 	if (e.target.matches("#active-button") && !(displaying === 1)) {
+		document.querySelector(".active").classList.remove("active");
+		showActiveButton.parentElement.classList.add("active");
 		refreshDisplay(1);
 	}
 });
@@ -175,6 +193,8 @@ document.addEventListener("click", function(e) {
 // Event listener to handle completed filter
 document.addEventListener("click", function(e) {
 	if (e.target.matches("#completed-button") && !(displaying === 2)) {
+		document.querySelector(".active").classList.remove("active");
+		showCompleteButton.parentElement.classList.add("active");
 		refreshDisplay(2);
 	}
 });
