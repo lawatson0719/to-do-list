@@ -60,7 +60,7 @@ function refreshDisplay (mode) {
 	if (mode === 0) {
 		filtered = data.filter((value) => (true));
 
-		filterAdd(filtered);
+		populate(filtered);
 
 		displaying = 0;
 	}
@@ -69,7 +69,7 @@ function refreshDisplay (mode) {
 	if (mode === 1) {
 		filtered = data.filter((value) => (value.completed === false));
 
-		filterAdd(filtered);
+		populate(filtered);
 
 		displaying = 1;
 	}
@@ -78,7 +78,7 @@ function refreshDisplay (mode) {
 	if (mode === 2) {
 		filtered = data.filter((value) => (value.completed === true));
 
-		filterAdd(filtered);
+		populate(filtered);
 
 		displaying = 2;
 	}
@@ -86,7 +86,7 @@ function refreshDisplay (mode) {
 	setListCounter(filtered);
 }
 
-function filterAdd(arr) {
+function populate(arr) {
 	for (var i = 0 ; i < arr.length ; i++) {
 		addListItem(arr[i].id, arr[i].content, arr[i].completed);
 	}
@@ -175,26 +175,26 @@ list.addEventListener("click", function(e) {
 // Event listener to handle all filter
 document.addEventListener("click", function(e) {
 	if (e.target.matches("#show-all-button") && !(displaying === 0)) {
-		document.querySelector(".active").classList.remove("active");
-		showAllButton.parentElement.classList.add("active");
 		refreshDisplay(0);
+		document.querySelector(".active").classList.remove("active");
+		showAllButton.classList.add("active");
 	}
 });
 
 // Event listener to handle active filter
 document.addEventListener("click", function(e) {
 	if (e.target.matches("#active-button") && !(displaying === 1)) {
-		document.querySelector(".active").classList.remove("active");
-		showActiveButton.parentElement.classList.add("active");
 		refreshDisplay(1);
+		document.querySelector(".active").classList.remove("active");
+		showActiveButton.classList.add("active");
 	}
 });
 
 // Event listener to handle completed filter
 document.addEventListener("click", function(e) {
 	if (e.target.matches("#completed-button") && !(displaying === 2)) {
-		document.querySelector(".active").classList.remove("active");
-		showCompleteButton.parentElement.classList.add("active");
 		refreshDisplay(2);
+		document.querySelector(".active").classList.remove("active");
+		showCompleteButton.classList.add("active");
 	}
 });

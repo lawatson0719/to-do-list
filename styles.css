@@ -41,13 +41,7 @@ body {
   	transition-duration: 0.3s;
   	transition-property: transform;
   	transition-timing-function: ease-out;
-  	background-color: #245367;
-
-}
-
-.active:hover {
   	transform: translateY(-8px);
-  	background-color: #245367;
 }
 
 .active:active {
