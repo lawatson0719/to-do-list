@@ -1,18 +1,23 @@
+// function to add list item to data
 function registerListItem(id, content) {
 	var listItem = new ListItem(id, content);
 	data.push(listItem);
 }
 
+// list item constructor function
 function ListItem (id, content) {
 	this.id = id;
 	this.completed = false;
 	this.content = content;
 }
 
-function addListItem(id, content) {
+// function to add list item to page
+function addListItem(id, content, status) {
 	var newTodo = document.createElement("li");
 	newTodo.classList.add("to-do");
-	newTodo.id= "todo" + (idCounter);
+	newTodo.id= "todo" + (id);
+
+
 	// Create three elements to be inserted into the new todo
 	var textSpan = document.createElement("span");
 	var itemDeleteButton = document.createElement("button");
@@ -21,6 +26,9 @@ function addListItem(id, content) {
 
 	// insert the text input into the span
 	textSpan.textContent = content;
+
+	// toggle the checkbox appropriately
+	itemCompleteButton.checked = status;
 
 	// add classes to the buttons to control them
 	itemCompleteButton.classList.add("complete-button");
@@ -37,9 +45,10 @@ function addListItem(id, content) {
 	list.appendChild(newTodo);
 }
 
+// Function to render page dynamically
 function refreshDisplay (mode) {
-	// This garbage function is going to have to run a stupid motherfucking loop every time you need 
-	// to refresh what's in the list items
+
+		// Clear out list items on screen
 	for (var i = list.children.length - 1; i >= 0; i-- ) {
 		var removingChild = list.children[i];
 		list.removeChild(removingChild);
@@ -47,41 +56,38 @@ function refreshDisplay (mode) {
 
 	var filtered;
 
+	// Display mode "ALL"
 	if (mode === 0) {
 		for (var i = 0 ; i < data.length ; i++) {
-			console.log(data[i].content);
-			addListItem(data[i].id, data[i].content);
+			addListItem(data[i].id, data[i].content, data[i].completed);
 		}
 
 
 		displaying = 0;
 	}
 
-
+	// Display mode "ACTIVE"
 	if (mode === 1) {
 		filtered = data.filter((value) => (value.completed === false));
-		console.log(filtered);
 
 
-		for (var i = 0 ; i < data.length ; i++) {
-			console.log("Yo");
+		for (var i = 0 ; i < filtered.length ; i++) {
+			addListItem(filtered[i].id, filtered[i].content, filtered[i].completed);
 		}
 
 		displaying = 1;
 	}
 
-
+	// Display mode "COMPLETED"
 	if (mode === 2) {
 		filtered = data.filter((value) => (value.completed === true));
-		console.log(filtered);
 
 		for (var i = 0 ; i < filtered.length ; i++) {
-			addListItem(filtered[i].id, filtered[i].content);
+			addListItem(filtered[i].id, filtered[i].content, filtered[i].completed);
 		}
 
 		displaying = 2;
 	}
-
 }
 
 // empty array to fill with todo objects
@@ -119,16 +125,18 @@ input.addEventListener("keydown", function(e) {
 // Event listener to handle deletions
 list.addEventListener("click", function(e) {
 	if (e.target.matches(".delete-button")) {
-		// grab and remove deleted todo from DOM
+			// grab targeted todo from DOM
 		var id = e.target.parentElement.id; 
 		var axedItem = document.querySelector("#" + id);
+
+			//remove item from DOM
 		axedItem.parentElement.removeChild(axedItem);
 		
-
+			// Find todo in data by id
 		id = Number(id.slice(4));
 		var index = data.findIndex((value) => (value.id === id));
 
-
+			// remove item from data
 		data.splice(index, 1);
 	} 
 });
@@ -136,14 +144,17 @@ list.addEventListener("click", function(e) {
 // Event listener to handle completions
 list.addEventListener("click", function(e) {
 	if (e.target.matches(".complete-button")) {
+			// grab id of targeted todo from DOM
 		var id = e.target.parentElement.id;
 
+			//  Match id to data, set completed property
 		id = Number(id.slice(4));
 		var index = data.findIndex((value) => (value.id === id));
-
-
-
 		data[index].completed = data[index].completed ? false : true;
+
+
+			// Render to remove item if appropriate
+		setTimeout(refreshDisplay.bind(null, displaying), 600);
 	} 
 });
 
@@ -156,7 +167,7 @@ document.addEventListener("click", function(e) {
 
 // Event listener to handle active filter
 document.addEventListener("click", function(e) {
-	if (e.target.matches("#active-button") && !(displaying === 0)) {
+	if (e.target.matches("#active-button") && !(displaying === 1)) {
 		refreshDisplay(1);
 	}
 });
