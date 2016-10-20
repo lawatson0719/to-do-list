@@ -31,7 +31,10 @@ body {
 	border-radius: 0.5em;
 	background-color: #ddd;
 	border: none;
-	outline: none;
+}
+
+.active {
+	
 }
 
 #num-of-items {
